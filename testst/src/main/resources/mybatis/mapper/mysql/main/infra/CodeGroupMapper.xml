@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.infra.codegroup.CodeGroupDao">
+
+	<resultMap id="resultMapObj" type="com.example.demo.infra.codegroup.CodeGroupDto"></resultMap>
+
+    <select id="selectList" resultMap="resultMapObj">
+		select
+			a.seq
+		    ,a.memo
+		    ,(select
+				count(*)
+				from code aa
+				where aa.codeGroup_seq = a.seq) as xCodeGourpCount
+			<!-- 강사님 카운트 코드: select count(aa.ifcdSeq) from infrCode aa where 1=1 and aa.ifcdDelNy = 0 and aa.ifcgSeq = a.ifcgSeq) as xifcdSeqCount -->
+			,a.name
+			,a.modDateTime
+			,a.delNy
+			<!-- 디폴트값으로 가져오는 내용이 있어 안 넣어도 불러오기 가능 -->
+			,a.regDatetime
+		
+		from
+			codeGroup a
+
+    </select>
+    
+	  
+</mapper>

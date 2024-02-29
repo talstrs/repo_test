@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 모름 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Dao 경로 -->
+<mapper namespace="com.example.demo.infra.code.CodeDao">
+
+	<!-- 아이디 설정하여 셀렉문에 부과 / Dto 경로 -->
+	<resultMap id="resultMapObj" type="com.example.demo.infra.code.CodeDto"></resultMap>
+	
+	<select id="selectList" resultMap="resultMapObj">
+		select
+			a.seq as codeSeq
+		    ,a.name as codeName
+		    ,a.memo as codeMemo
+		    ,a.delNy as codeDelNy
+		    ,a.regDatetime as codeRegDatetime
+		    ,a.modDatetime as codeModDatetime
+		    ,a.codeGroup_seq as codeGroupSeqF
+		    ,b.seq as codeGroupSeq
+		    ,b.name as codeGroupName
+		from
+			code a
+		left join codeGroup b on a.codeGroup_seq = b.seq and a.delNy = 0
+		
+	</select>
+</mapper>

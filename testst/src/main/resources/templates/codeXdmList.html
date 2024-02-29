@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>codeGroupXdmList</title>
+</head>
+<body>
+    <table>
+    	<tr>
+    		<td>ch</td>
+    		<td>#</td>
+    		<td>codeGroupSeq</td>
+    		<td>codeGroupName</td>
+    		<td>codeDelNy</td>
+    		<td>codeSeq</td>
+    		<td>codeName</td>
+    		<td>codeModDatetime</td>
+    	</tr>
+    	
+    	<tr th:if="${#lists.isEmpty(list)}">
+    	    <td colspan="8">There is no data!!!</td>
+    	</tr>
+    	
+    	<tr th:if="!${#lists.isEmpty(list)}" th:each="lista:${list}">
+    	    <td></td>
+    	    <td></td>
+    	    <td th:text="${lista.codeGroupSeq}"></td>
+    	    <td th:text="${lista.codeGroupName}"></td>
+    	    
+    	    <td th:if="${lista.CodeDelNy eq 0}">N</td>
+    	    <td th:unless="${lista.CodeDelNy eq 0}">Y</td>
+    	    
+    	    <td th:text="${lista.codeSeq}"></td>
+    	    <td th:text="${lista.codeName}"></td>
+    	    <td th:text="${#dates.format(lista.codeModDatetime, 'yyyy년MM월dd일 HH:mm:ss')}"></td>
+    	</tr>
+    </table>
+</body>
