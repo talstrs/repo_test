@@ -31,6 +31,10 @@
     	    <td th:if="${lista.CodeDelNy eq 0}">N</td>
     	    <td th:unless="${lista.CodeDelNy eq 0}">Y</td>
     	    
+    	    <!-- 링크 걸기 -->
+    	    <td th:text="${lista.codeSeq}"></td>
+    	    <td><a th:href="@{/codeGroupView(codeSeq=${lista.codeSeq})}" th:text="${lista.codeName}"></a></td>
+    	        	    
     	    <td th:text="${lista.codeSeq}"></td>
     	    <td th:text="${lista.codeName}"></td>
     	    <td th:text="${#dates.format(lista.codeModDatetime, 'yyyy년MM월dd일 HH:mm:ss')}"></td>

@@ -40,5 +40,21 @@ public class CodeGroupController {
 		
 		return "codeGroupXdmList";
 	}
+		
+	/* 링크 주소의 html 추가/ 데이터 받기 */
+	/* dto로 데이터 정상적으로 넘어오는지 확인하기: codeGroupDto dto 설정 후 sysout으로 확인 */
+	@RequestMapping(value = "/codeGroupView")
+	public String codeGroupView(CodeGroupDto dto) throws Exception{
+	
+//		넘긴 데이터: 해당 링크 클릭시 콘솔 창에 해당 데이터 값 확인
+//		but, dto 이름과 동일하게 설정해야 함
+		System.out.println("dto.getSeq(): " + dto.getSeq());
+		System.out.println("dto.getName(): " + dto.getName());
+		
+//		넘기지 않은 데이터: 해당 링크 클릭스 콘솔 창에 null 값으로 확인
+		System.out.println("dto.getModDatetime(): " + dto.getModDatetime());
+		
+		return "codeGroupView";
+	}
 
 }
