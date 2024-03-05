@@ -22,10 +22,34 @@ public class CodeGroupService {
 //		
 //		return list;
 //	}
-
-//	패턴 2
+// 	서비스는 논리 로직
+//	패턴 2 리스트 호출
 	public List<CodeGroupDto> selectList() {
 		return dao.selectList();
 	}
+	
+//  패턴 2 객체 하나 호출
+	public CodeGroupDto selectOne(CodeGroupDto dto) {
+		return dao.selectOne(dto);
+	}
 
+//  insert 서비스
+	public int insert(CodeGroupDto dto) {
+		return dao.insert(dto);
+	}
+	
+//  update 서비스
+	public int update(CodeGroupDto dto) {
+		return dao.update(dto);
+	}
+	
+//  delete 업데이트 서비스
+	public int updateDelete(CodeGroupDto dto) {
+		return dao.updateDelete(dto);
+	}
+	
+//  delete 완전삭제 서비스
+	public int delete(CodeGroupDto dto) {
+		return dao.delete(dto);
+	}
 }

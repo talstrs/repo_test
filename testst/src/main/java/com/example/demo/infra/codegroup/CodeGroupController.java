@@ -44,7 +44,7 @@ public class CodeGroupController {
 	/* 링크 주소의 html 추가/ 데이터 받기 */
 	/* dto로 데이터 정상적으로 넘어오는지 확인하기: codeGroupDto dto 설정 후 sysout으로 확인 */
 	@RequestMapping(value = "/codeGroupView")
-	public String codeGroupView(CodeGroupDto dto) throws Exception{
+	public String codeGroupView(CodeGroupDto dto, Model model) throws Exception{
 	
 //		넘긴 데이터: 해당 링크 클릭시 콘솔 창에 해당 데이터 값 확인
 //		but, dto 이름과 동일하게 설정해야 함
@@ -54,7 +54,83 @@ public class CodeGroupController {
 //		넘기지 않은 데이터: 해당 링크 클릭스 콘솔 창에 null 값으로 확인
 		System.out.println("dto.getModDatetime(): " + dto.getModDatetime());
 		
+		// 모델로 내용 받았을 경우 html로 넘겨주어야 함
+		model.addAttribute("item", service.selectOne(dto));
+		
 		return "codeGroupView";
+	}
+	
+	@RequestMapping(value = "/codeGroupEdit")
+	public String codeGroupEdit(CodeGroupDto dto, Model model) throws Exception{
+	
+		// 값이 실제로 넘어오는지 콘솔창으로 확인하기
+		System.out.println("dto.getSeq(): " + dto.getSeq());
+		
+		// 모델로 내용 받았을 경우 html로 넘겨주어야 함
+		// addAttribute = 함수
+		// addAttribute("변수명", 값(객체));
+		model.addAttribute("item", service.selectOne(dto));
+		
+		
+		return "codeGroupEdit";
+	}
+	
+	@RequestMapping(value = "/codeGroupXdmListAdd")
+	public String codeGroupXdmListAdd(CodeGroupDto dto) throws Exception{
+		
+		
+		return "codeGroupXdmListAdd";
+	}
+	
+	@RequestMapping(value = "/codeGroupInsert")
+	// 컨트롤러만 리턴 타입을 String으로 변경 가능
+	public String codeGroupInsert(CodeGroupDto dto) throws Exception{
+		
+		System.out.println("dto.getName(): " + dto.getName());
+		System.out.println("dto.getMemo(): " + dto.getMemo());
+		
+		service.insert(dto);
+		
+//		return "codeGroupXdmListAdd";
+		// 보여지는 화면을 만들기 위하여 리턴값으로 redirect를 사용하여 노출
+		// redirect:/파일명
+		// 해당 리퀘스트매핑 페이지로 가라는 내용
+		return "redirect:/codeGroupXdmList";
+	}
+	
+	@RequestMapping(value = "/codeGroupUpdt")
+	// 컨트롤러만 리턴 타입을 String으로 변경 가능
+	public String codeGroupUpdt(CodeGroupDto dto) throws Exception{
+		
+		System.out.println("dto.getName(): " + dto.getName());
+		
+		service.update(dto);
+		
+//		return "codeGroupXdmListAdd";
+		// 보여지는 화면을 만들기 위하여 리턴값으로 redirect를 사용하여 노출
+		// redirect:/파일명
+		// 해당 리퀘스트매핑 페이지로 가라는 내용
+		return "redirect:/codeGroupXdmList";
+	}
+
+	@RequestMapping(value = "/codeGroupDtOne")
+	public String codeGroupDtOne(CodeGroupDto dto) throws Exception{
+		
+		System.out.println("dto.getSeq(): " + dto.getSeq());
+		System.out.println(dto.toString());
+		service.updateDelete(dto);
+		
+		return "redirect:/codeGroupXdmList";
+	}
+	
+	@RequestMapping(value = "/codeGroupDtTwo")
+	public String codeGroupDtTwo(CodeGroupDto dto) throws Exception{
+		
+		System.out.println("dto.getSeq(): " + dto.getSeq());
+		System.out.println(dto.toString());
+		service.delete(dto);
+		
+		return "redirect:/codeGroupXdmList";
 	}
 
 }
